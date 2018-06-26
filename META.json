@@ -1,7 +1,7 @@
 {
-   "abstract" : "It's new $module",
+   "abstract" : "module to replace MS document by its text contents",
    "author" : [
-      "Kaz Utashiro <kaz@utashiro.com>"
+      "Kazumasa Utashiro"
    ],
    "dynamic_config" : 0,
    "generated_by" : "Minilla/v3.0.14, CPAN::Meta::Converter version 2.150010",
@@ -42,7 +42,10 @@
       },
       "runtime" : {
          "requires" : {
-            "perl" : "5.008001"
+            "App::Greple" : "8.26",
+            "App::Greple::msdoc" : "1.00",
+            "App::optex" : "v0.1.0",
+            "perl" : "5.014"
          }
       },
       "test" : {
@@ -52,7 +55,21 @@
       }
    },
    "release_status" : "unstable",
+   "resources" : {
+      "bugtracker" : {
+         "web" : "https://github.com/kaz-utashiro/optex-msdoc/issues"
+      },
+      "homepage" : "https://github.com/kaz-utashiro/optex-msdoc",
+      "repository" : {
+         "type" : "git",
+         "url" : "git://github.com/kaz-utashiro/optex-msdoc.git",
+         "web" : "https://github.com/kaz-utashiro/optex-msdoc"
+      }
+   },
    "version" : "0.01",
    "x_authority" : "cpan:UTASHIRO",
+   "x_contributors" : [
+      "Kaz Utashiro <kaz@utashiro.com>"
+   ],
    "x_serialization_backend" : "JSON::PP version 2.27400_02"
 }

@@ -1,4 +1,8 @@
-requires 'perl', '5.008001';
+requires 'perl', '5.014';
+
+requires 'App::optex', 'v0.1';
+requires 'App::Greple', '8.26';
+requires 'App::Greple::msdoc', '1.00';
 
 on 'test' => sub {
     requires 'Test::More', '0.98';
