@@ -4,7 +4,7 @@ use 5.014;
 use strict;
 use warnings;
 
-our $VERSION = "0.01";
+our $VERSION = "0.02";
 
 =encoding utf-8
 
@@ -14,7 +14,7 @@ msdoc - module to replace MS document by its text contents
 
 =head1 VERSION
 
-Version 0.01
+Version 0.02
 
 =head1 SYNOPSIS
 
@@ -97,6 +97,7 @@ sub msdoc {
     argv {
 	for (@_) {
 	    my($suffix) = /\.(docx|pptx|xlsx)$/x or next;
+	    -f $_ or next;
 	    my $tmp = new App::optex::Tmpfile;
 	    $tmp->write(`greple -Mmsdoc --dump "$_"`)->rewind;
 	    push @persist, $tmp;
@@ -109,3 +110,10 @@ sub msdoc {
 1;
 
 __DATA__
+
+##
+## GIT_EXTERNAL_DIFF is called with 7 parameters:
+##    path old-file old-hex old-mode new-file new-hex new-mode
+##    0    1        2       3        4        5       6
+##
+option --git-external-diff $<copy(1,1)> $<copy(4,1)> $<remove>

@@ -4,7 +4,7 @@ msdoc - module to replace MS document by its text contents
 
 # VERSION
 
-Version 0.01
+Version 0.02
 
 # SYNOPSIS
 

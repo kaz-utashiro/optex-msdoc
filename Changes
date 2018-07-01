@@ -2,6 +2,11 @@ Revision history for Perl extension App-optex-msdoc
 
 {{$NEXT}}
 
+0.02 2018-07-01T02:07:39Z
+
+    - Add --git-external-diff option.
+    - Check file existence.
+
 0.01 2018-06-26T16:20:32Z
 
     - original version
