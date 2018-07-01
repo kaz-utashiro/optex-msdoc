@@ -4,7 +4,7 @@ use 5.014;
 use strict;
 use warnings;
 
-our $VERSION = "0.02";
+our $VERSION = "0.03";
 
 =encoding utf-8
 
@@ -14,7 +14,7 @@ msdoc - module to replace MS document by its text contents
 
 =head1 VERSION
 
-Version 0.02
+Version 0.03
 
 =head1 SYNOPSIS
 
@@ -26,7 +26,7 @@ This module replaces argument which terminate with I<.docx>, I<pptx>
 or I<xlsx> files by node representing its text information.  File
 itself is not altered.
 
-For examle, you can check the text difference between ms word files
+For example, you can check the text difference between MS word files
 like this:
 
     $ optex diff -Mmsdoc OLD.docx NEW.docx
@@ -47,6 +47,13 @@ process substitution.
 
     $ diff <(greple -Mmsdoc --dump OLD.docx) \
            <(greple -Mmsdoc --dump NEW.docx)
+
+=head1 ENVIRONMENT
+
+This version experimentally support other converter program.  If the
+environment variable B<OPTEX_MSDOC_CONVERTER> is set, it is used
+instead of B<greple>.  Choose one from B<greple>, B<pandoc> or
+B<tika>.
 
 =head1 SEE ALSO
 
@@ -89,6 +96,23 @@ sub argv (&) {
     @$argv = $sub->(@$argv);
 }
 
+my %converter = (
+    'greple' => "greple -Mmsdoc --dump \"%s\"",
+    'pandoc' => "pandoc -t plain \"%s\"",
+    'tika'   => "tika --text \"%s\"",
+    );
+
+my $converter_default = 'greple';
+
+my $converter = $ENV{OPTEX_MSDOC_CONVERTER} || $converter_default;
+
+sub to_text {
+    my $file = shift;
+    my $format = $converter{$converter};
+    my $exec = sprintf $format, $file;
+    qx($exec);
+}
+
 use App::optex::Tmpfile;
 
 my @persist;
@@ -99,7 +123,7 @@ sub msdoc {
 	    my($suffix) = /\.(docx|pptx|xlsx)$/x or next;
 	    -f $_ or next;
 	    my $tmp = new App::optex::Tmpfile;
-	    $tmp->write(`greple -Mmsdoc --dump "$_"`)->rewind;
+	    $tmp->write(to_text($_))->rewind;
 	    push @persist, $tmp;
 	    $_ = $tmp->path;
 	}
@@ -117,3 +141,6 @@ __DATA__
 ##    0    1        2       3        4        5       6
 ##
 option --git-external-diff $<copy(1,1)> $<copy(4,1)> $<remove>
+
+#  LocalWords:  msdoc optex docx pptx xlsx diff greple pandoc tika
+#  LocalWords:  Kazumasa Utashiro

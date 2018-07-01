@@ -4,7 +4,7 @@ msdoc - module to replace MS document by its text contents
 
 # VERSION
 
-Version 0.02
+Version 0.03
 
 # SYNOPSIS
 
@@ -16,7 +16,7 @@ This module replaces argument which terminate with _.docx_, _pptx_
 or _xlsx_ files by node representing its text information.  File
 itself is not altered.
 
-For examle, you can check the text difference between ms word files
+For example, you can check the text difference between MS word files
 like this:
 
     $ optex diff -Mmsdoc OLD.docx NEW.docx
@@ -37,6 +37,13 @@ process substitution.
 
     $ diff <(greple -Mmsdoc --dump OLD.docx) \
            <(greple -Mmsdoc --dump NEW.docx)
+
+# ENVIRONMENT
+
+This version experimentally support other converter program.  If the
+environment variable **OPTEX\_MSDOC\_CONVERTER** is set, it is used
+instead of **greple**.  Choose one from **greple**, **pandoc** or
+**tika**.
 
 # SEE ALSO
 
