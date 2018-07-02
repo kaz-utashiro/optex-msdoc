@@ -4,7 +4,7 @@ use 5.014;
 use strict;
 use warnings;
 
-our $VERSION = "0.03";
+our $VERSION = "0.04";
 
 =encoding utf-8
 
@@ -14,7 +14,7 @@ msdoc - module to replace MS document by its text contents
 
 =head1 VERSION
 
-Version 0.03
+Version 0.04
 
 =head1 SYNOPSIS
 
@@ -81,9 +81,6 @@ package App::optex::msdoc;
 use utf8;
 use Encode;
 use Data::Dumper;
-
-binmode STDIN,  ":encoding(utf8)";
-binmode STDOUT, ":encoding(utf8)";
 
 my($mod, $argv);
 sub initialize {
